@@ -62,9 +62,19 @@ function finishTest () {
     if (gameBoard[currentCombination[0]] === 'unclicked' || gameBoard[currentCombination[1]] === 'unclicked' || gameBoard[currentCombination[2]] === 'unclicked') {
 
     } else {
-      if (gameBoard[currentCombination[0]] === gameBoard[currentCombination[1]] && gameBoard[currentCombination[1]] === gameBoard[currentCombination[2]]) console.log(`${gameBoard[currentCombination[0]]} has won!`);
+      if (gameBoard[currentCombination[0]] === gameBoard[currentCombination[1]] && gameBoard[currentCombination[1]] === gameBoard[currentCombination[2]]) alert(`${gameBoard[currentCombination[0]]} has won!`);
     }
   })
 
+  // test for draw
+  let emptyCount = 0;
+  gameBoard.forEach( function(i) {
+    if (i === 'unclicked') {
+      emptyCount ++;
+    }
+  });
+  if (emptyCount === 0) {
+    alert('Draw');
+  }
 
 }
