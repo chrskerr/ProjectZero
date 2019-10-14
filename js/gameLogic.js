@@ -4,6 +4,12 @@ $('#playerOne').animate({'font-size': '45px'}, 0)
 
 let whoseTurn = "playerOne";
 
+let playerOneName = "Gary";
+let playerTwoName = "Ash";
+
+$('p#playerOne').text(playerOneName);
+$('p#playerTwo').text(playerTwoName);
+
 $('.game-cell').click(function() {
   if (gameBoard[$(this).attr('id')] === 'unclicked') {
     recordChoice($(this).attr('id'));
@@ -65,14 +71,22 @@ function finishTest () {
     }
   });
   if (emptyCount === 0) {
-    alert('Draw');
+    gameover('draw');
   }
 }
 
 
 function gameover(i) {
+  $('#gameoverScreen').removeClass('hidden');
   $('#gameoverScreen').animate({'left': '0'}, 400);
-  $('#gameoverScreen p').text(`${i} has won!`);
+
+  if (i === 'draw') {
+    $('#gameoverScreen p').text(`The game was a draw`);
+  } else if (i === 'playerOne') {
+    $('#gameoverScreen p').text(`${playerOneName} has won!`);
+  } else if (i === 'playerTwo') {
+    $('#gameoverScreen p').text(`${playerTwoName} has won!`);
+  }
 }
 
 /////////////////////

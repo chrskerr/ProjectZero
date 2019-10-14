@@ -56,6 +56,10 @@ body {
   text-align: center;
 }
 
+.characterchooser {
+  width: 30%;
+}
+
 #begin {
   margin: 50px 50px;
   background-color: grey;
