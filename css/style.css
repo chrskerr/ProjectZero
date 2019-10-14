@@ -15,14 +15,6 @@ body {
   height: 150px;
   width: 150px;
   border: 1px grey dashed;
-}
-
-.playerOne {
-  background-image: url('../images/squirtle.png');
-  background-size: contain;
-}
-.playerTwo {
-  background-image: url('../images/charmander.png');
   background-size: contain;
 }
 
@@ -54,4 +46,57 @@ body {
   display: inline-block;
   vertical-align: top;
   border-style: none;
+}
+
+#characterPage {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+  text-align: center;
+}
+
+#begin {
+  margin: 50px 50px;
+  background-color: grey;
+  text-align: center;
+}
+
+#gameoverScreen {
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  position: absolute;
+  left: 2000px;
+  z-index: 100;
+  text-align: center;
+  z-index: 99;
+  top: 0;
+}
+
+#characterPage table {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+
+.garyChosen {
+  display: none;
+  width: 33%;
+  margin: auto;
+}
+
+.ashChosen {
+  display: none;
+  width: 33%;
+  margin: auto;
+}
+
+.begin {
+  margin: 0px 400px;
+}
+
+.hidden {
+  display: none;
 }
