@@ -1,22 +1,6 @@
-let gameBoard = ['unclicked','unclicked','unclicked','unclicked','unclicked','unclicked','unclicked','unclicked','unclicked']
-
 $('#playerOne').animate({'font-size': '45px'}, 0)
-
-let whoseTurn = "playerOne";
-
-let playerOneName = "Gary";
-let playerTwoName = "Ash";
-
 $('p#playerOne').text(playerOneName);
 $('p#playerTwo').text(playerTwoName);
-
-$('.game-cell').click(function() {
-  if (gameBoard[$(this).attr('id')] === 'unclicked') {
-    recordChoice($(this).attr('id'));
-    //checkForWin();
-    swapPlayer();
-  }
-});
 
 function recordChoice (cellIndex) {
   if (whoseTurn === 'playerOne') {
@@ -29,7 +13,6 @@ function recordChoice (cellIndex) {
   }
 
   setTimeout(finishTest, 200);
-
 }
 
 function swapPlayer () {
@@ -75,7 +58,6 @@ function finishTest () {
   }
 }
 
-
 function gameover(i) {
   $('#gameoverScreen').removeClass('hidden');
   $('#gameoverScreen').animate({'left': '0'}, 400);
@@ -88,29 +70,3 @@ function gameover(i) {
     $('#gameoverScreen p').text(`${playerTwoName} has won!`);
   }
 }
-
-/////////////////////
-// CHARACTER SELECTOR
-let chosenCharacters = [];
-$('.characterchooser').click(function() {
-  chosenCharacters.push($(this).attr('id'));
-  $('.garyChosen').css({'display': 'inline-block'});
-  $('img.garyChosen').attr('src', chosenCharacters[0]);
-
-  if (chosenCharacters.length === 2) {
-  $('#lineTwo').text('Ash, now your turn!');
-  $('.ashChosen').css({'display': 'inline-block'});
-  $('img.ashChosen').attr('src', chosenCharacters[1]);
-  }
-
-});
-
-$('.begin').click( function() {
-  if (chosenCharacters.length === 2) {
-    $('img.playerOne').attr('src',chosenCharacters[0]);
-    $('img.playerTwo').attr('src',chosenCharacters[1]);
-    $('#characterPage').animate({'left': '-1500'}, 400);
-
-    setTimeout( function() {$('#characterPage').css({'display': 'none'})}, 400);
-    setTimeout( function() {$('#gameScreen').removeClass('hidden')}, 400);
-}});
