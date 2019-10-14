@@ -10,7 +10,7 @@
   <body>
 
     <!-- HTML code for the character selector page -->
-    <div id='characterPage'>
+    <div id='characterPage' class='pageDiv'>
       <h1>Please select a character to begin!</h1>
       <h2 id='lineTwo'>Gary can select first!<h2>
       <table>
@@ -29,6 +29,7 @@
           </td>
         </tr>
       </table>
+      <button class='begin'>BEGIN</button>
       <div class='garyChosen'>
         <p>Gary has chosen</p>
         <img class='garyChosen' src="" alt="">
@@ -37,12 +38,11 @@
         <p>Ash has chosen</p>
         <img class='ashChosen' src="" alt="">
       </div>
-      <button class='begin'>BEGIN</button>
     </div>
 
     <!-- HTML for the game screen -->
 
-    <div id='gameScreen' class='hidden'>
+    <div id='gameScreen' class='pageDiv hidden'>
       <heading>
         <div class='playerNav'>
           <img class='playerOne'></img>
@@ -69,20 +69,18 @@
             <td class='game-cell' id='7'></td>
             <td class='game-cell' id='8'></td>
           </tr>
+        </table>
       </main>
-
-      <aside>
-      </aside>
     </div>
 
     <!-- HTML for the gameover / evolution screen -->
-    <div id="gameoverScreen" class='hidden'>
-      <p>You lost....</p>
+    <div id="gameoverScreen" class='pageDiv hidden'>
+      <p id='gameResults'>TEST</p>
     </div>
 
     <script src='js/jquery-3.4.1.js'></script>
-    <script src='js/definitions.js'></script>
     <script src='js/listeners.js'></script>
-    <script src='js/evolution.js'></script>
+    <script src='js/animations.js'></script>
+    <script src='js/ai.js'></script>
     <script src='js/gameLogic.js'></script>
   </body>

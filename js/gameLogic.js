@@ -1,3 +1,10 @@
+// a place for all declarations and variables
+let whoseTurn = "playerOne";
+let playerOneName = "Gary";
+let playerTwoName = "Ash";
+let gameBoard = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+let chosenCharacters = [];
+
 $('#playerOne').animate({'font-size': '45px'}, 0)
 $('p#playerOne').text(playerOneName);
 $('p#playerTwo').text(playerTwoName);
@@ -5,11 +12,11 @@ $('p#playerTwo').text(playerTwoName);
 function recordChoice (cellIndex) {
   if (whoseTurn === 'playerOne') {
     $(`#${cellIndex}`).css({'background-image': `url(${chosenCharacters[0]})`});
-    gameBoard[cellIndex] = 'playerOne';
+    gameBoard[cellIndex] = 1;
   }
   if (whoseTurn === 'playerTwo') {
     $(`#${cellIndex}`).css({'background-image': `url(${chosenCharacters[1]})`});
-    gameBoard[cellIndex] = 'playerTwo';
+    gameBoard[cellIndex] = 2;
   }
 
   setTimeout(finishTest, 200);
@@ -38,8 +45,7 @@ function finishTest () {
   // eight line combinations (012)(345)(678)(036)(147)(258)(048)(246)
   let combinationsArray = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
   combinationsArray.forEach( function(currentCombination) {
-    if (gameBoard[currentCombination[0]] === 'unclicked' || gameBoard[currentCombination[1]] === 'unclicked' || gameBoard[currentCombination[2]] === 'unclicked') {
-
+    if (gameBoard[currentCombination[0]] === 0 || gameBoard[currentCombination[1]] === 0 || gameBoard[currentCombination[2]] === 0) {
     } else {
       if (gameBoard[currentCombination[0]] === gameBoard[currentCombination[1]] && gameBoard[currentCombination[1]] === gameBoard[currentCombination[2]])
       gameover(gameBoard[currentCombination[0]]);
@@ -49,24 +55,21 @@ function finishTest () {
   // test for draw
   let emptyCount = 0;
   gameBoard.forEach( function(i) {
-    if (i === 'unclicked') {
-      emptyCount ++;
-    }
+    if (i === 0) emptyCount++;
   });
-  if (emptyCount === 0) {
-    gameover('draw');
-  }
+  if (emptyCount === 0) gameover('draw');
 }
 
 function gameover(i) {
-  $('#gameoverScreen').removeClass('hidden');
-  $('#gameoverScreen').animate({'left': '0'}, 400);
+  turnPage('#gameScreen', '#gameoverScreen');
 
-  if (i === 'draw') {
-    $('#gameoverScreen p').text(`The game was a draw`);
-  } else if (i === 'playerOne') {
-    $('#gameoverScreen p').text(`${playerOneName} has won!`);
-  } else if (i === 'playerTwo') {
-    $('#gameoverScreen p').text(`${playerTwoName} has won!`);
-  }
+  setTimeout(function() {
+    if (i === 'draw') {
+      $('#gameResults').text(`The game was a draw`);
+    } else if (i === 1) {
+      $('#gameResults').text(`${playerOneName} has won!`);
+    } else if (i === 2) {
+      $('#gameResults').text(`${playerTwoName} has won!`);
+    }
+  }, 0);
 }
