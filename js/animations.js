@@ -90,16 +90,6 @@ function evolve (playerRef) {
     $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
   }, 3400);
 
-// $('#newPokemon').attr('src', evolutions[loc[0]][loc[1]+1])
-// $('#oldPokemon').attr('src', evolutions[loc[0]][loc[1]])
-//
-//   AnimateTransition({
-//      container: '#roundOverScreen',
-//      blockIn: '#newPokemon',
-//      blockOut: '#oldPokemon',
-//      animation: 'fade-in'
-//   });
-
   $('img.playerOne').attr('src', players[0].image);
   $('img.playerTwo').attr('src', players[1].image);
 }

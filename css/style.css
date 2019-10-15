@@ -126,14 +126,6 @@ body {
   display: none;
 }
 
-.large {
-  width: 200px;
-}
-
-#gameModeChooser {
-  height: 100vh;
-}
-
 .modeChooserButton {
   width: 30%;
   margin: 5% 2%;
