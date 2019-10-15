@@ -19,9 +19,87 @@ function evolve (playerRef) {
     })
   });
 
-  // getKeyFrames
 
   if (evolutions[loc[0]][loc[1]+1]) players[playerRef - 1].image = evolutions[loc[0]][loc[1]+1];
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 0);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 500);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 1000);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 1250);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 1500);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 1750);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 2000);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 2250);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 2500);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 2650);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 2800);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 2950);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 3050);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 3150);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 3250);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+  }, 3350);
+
+  setTimeout(function(){
+    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+  }, 3400);
+
+// $('#newPokemon').attr('src', evolutions[loc[0]][loc[1]+1])
+// $('#oldPokemon').attr('src', evolutions[loc[0]][loc[1]])
+//
+//   AnimateTransition({
+//      container: '#roundOverScreen',
+//      blockIn: '#newPokemon',
+//      blockOut: '#oldPokemon',
+//      animation: 'fade-in'
+//   });
+
   $('img.playerOne').attr('src', players[0].image);
   $('img.playerTwo').attr('src', players[1].image);
 }

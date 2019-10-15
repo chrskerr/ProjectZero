@@ -4,6 +4,7 @@
 
   <head>
     <title>Poke Evolve!</title>
+    <link rel="stylesheet" href="css/transitions.css"/>
     <link rel='stylesheet' href='css/style.css'></link>
   </head>
 
@@ -97,10 +98,12 @@
     <!-- HTML for the gameover / evolution screen -->
     <div id="roundOverScreen" class='pageDiv hidden'>
       <p id='gameResults'></p>
-      <img class='large'></img.
+      <img id='oldPokemon'></img>
+      <!-- <img id='newPokemon'></img> -->
     </div>
 
     <script src='js/jquery-3.4.1.js'></script>
+    <script src="js/animateTransition.min.js"></script>
     <script src='js/listeners.js'></script>
     <script src='js/animations.js'></script>
     <script src='js/ai.js'></script>
