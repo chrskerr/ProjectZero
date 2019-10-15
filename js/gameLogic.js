@@ -27,7 +27,9 @@ function recordChoice (cellIndex) {
     $(`#${cellIndex}`).css({'background-image': `url(${players[0].image})`});
     board[cellIndex] = 1;
     swapPlayer();
-    if (mode === 'chooseVsComputer') idealMove()
+    if (mode === 'chooseVsComputer') {
+      setTimeout(idealMove, 550);
+    }
 
   } else if (whoseTurn === 2) {
     $(`#${cellIndex}`).css({'background-image': `url(${players[1].image})`});

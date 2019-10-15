@@ -19,7 +19,7 @@ function evolve (playerRef) {
     })
   });
 
-  // getKeyFrames 
+  // getKeyFrames
 
   if (evolutions[loc[0]][loc[1]+1]) players[playerRef - 1].image = evolutions[loc[0]][loc[1]+1];
   $('img.playerOne').attr('src', players[0].image);
