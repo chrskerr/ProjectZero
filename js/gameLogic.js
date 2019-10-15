@@ -1,8 +1,8 @@
 // a place for all declarations and variables
-let whoseTurn = "playerOne";
+let whoseTurn = 1;
 let playerOneName = "Gary";
 let playerTwoName = "Ash";
-let gameBoard = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+let board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 let chosenCharacters = [];
 
 $('#playerOne').animate({'font-size': '45px'}, 0)
@@ -10,27 +10,33 @@ $('p#playerOne').text(playerOneName);
 $('p#playerTwo').text(playerTwoName);
 
 function recordChoice (cellIndex) {
-  if (whoseTurn === 'playerOne') {
+  if (whoseTurn === 1) {
     $(`#${cellIndex}`).css({'background-image': `url(${chosenCharacters[0]})`});
-    gameBoard[cellIndex] = 1;
+    board[cellIndex] = 1;
+    swapPlayer();
+
+    idealMove();
+
   }
-  if (whoseTurn === 'playerTwo') {
+  if (whoseTurn === 2) {
     $(`#${cellIndex}`).css({'background-image': `url(${chosenCharacters[1]})`});
-    gameBoard[cellIndex] = 2;
+    board[cellIndex] = 2;
+    swapPlayer();
+
   }
 
   setTimeout(finishTest, 200);
 }
 
 function swapPlayer () {
-  if (whoseTurn === 'playerOne') {
-    whoseTurn = 'playerTwo';
+  if (whoseTurn === 1) {
+    whoseTurn = 2;
     $('#playerTwo').animate({'font-size': '45px'}, 200)
     $('#playerOne').animate({'font-size': '15px'}, 200)
     return;
   }
-  if (whoseTurn === 'playerTwo') {
-    whoseTurn = 'playerOne';
+  if (whoseTurn === 2) {
+    whoseTurn = 1;
     $('#playerOne').animate({'font-size': '45px'}, 200)
     $('#playerTwo').animate({'font-size': '15px'}, 200)
     return;
@@ -38,25 +44,17 @@ function swapPlayer () {
 }
 
 function finishTest () {
-  // test for a win
-  // 0 1 2
-  // 3 4 5
-  // 6 7 8
-  // eight line combinations (012)(345)(678)(036)(147)(258)(048)(246)
-  let combinationsArray = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
-  combinationsArray.forEach( function(currentCombination) {
-    if (gameBoard[currentCombination[0]] === 0 || gameBoard[currentCombination[1]] === 0 || gameBoard[currentCombination[2]] === 0) {
+  let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+  testList.forEach( function(test) {
+    if (board[test[0]] === 0 || board[test[1]] === 0 || board[test[2]] === 0) {
     } else {
-      if (gameBoard[currentCombination[0]] === gameBoard[currentCombination[1]] && gameBoard[currentCombination[1]] === gameBoard[currentCombination[2]])
-      gameover(gameBoard[currentCombination[0]]);
-    }
-  })
+      if (board[test[0]] === board[test[1]] && board[test[1]] === board[test[2]])
+      gameover(board[test[0]]);
+    }});
 
   // test for draw
   let emptyCount = 0;
-  gameBoard.forEach( function(i) {
-    if (i === 0) emptyCount++;
-  });
+  board.forEach(function(i) {if (i === 0) emptyCount++;});
   if (emptyCount === 0) gameover('draw');
 }
 

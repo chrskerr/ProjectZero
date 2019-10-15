@@ -19,7 +19,7 @@ body {
   color: #222222;
   /* letter-spacing: 3px;
   color: #ffcc03;
-  text-shadow: -3px -3px 0 blue, 3px -3px 0 blue, -3px 3px 0 blue, 3px 3px 0 blue; */
+  text-shadow: -2px -2px 1px #316DBE, 2px -2px 1px #316DBE, -2px 2px 1px #316DBE, 2px 2px 1px #316DBE; */
 }
 
 .pageDiv {
@@ -72,12 +72,6 @@ body {
   width: 30%;
 }
 
-#begin {
-  margin: 50px 50px;
-  background-color: grey;
-  text-align: center;
-}
-
 #characterPage table {
   width: 70%;
   margin: auto;
@@ -98,7 +92,10 @@ body {
 }
 
 .begin {
-  margin: 0px 400px;
+  margin: 0% 40%;
+  width: 9%;
+  background-color: grey;
+  text-align: center;
 }
 
 .hidden {

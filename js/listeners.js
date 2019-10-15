@@ -1,9 +1,8 @@
 // a place for all buttons and event listeners
 
 $('.game-cell').click(function() {
-  if (gameBoard[$(this).attr('id')] === 0) {
+  if (board[$(this).attr('id')] === 0) {
     recordChoice($(this).attr('id'));
-    swapPlayer();
   }
 });
 
