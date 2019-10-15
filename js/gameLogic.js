@@ -1,30 +1,37 @@
 // a place for all declarations and variables
 let whoseTurn = 1;
-let playerOneName = "Gary";
-let playerTwoName = "Ash";
-let board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-let chosenCharacters = [];
+let board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let players = [
+  {
+  ref: 1,
+  name: 'Gary',
+  image: '',
+  score: 0,
+},
+{
+  ref: 2,
+  name: 'Ash',
+  image: '',
+  score: 0,
+},
+];
 
 $('#playerOne').animate({'font-size': '45px'}, 0)
-$('p#playerOne').text(playerOneName);
-$('p#playerTwo').text(playerTwoName);
+$('p#playerOne').text(players[0].name);
+$('p#playerTwo').text(players[1].name);
 
 function recordChoice (cellIndex) {
   if (whoseTurn === 1) {
-    $(`#${cellIndex}`).css({'background-image': `url(${chosenCharacters[0]})`});
+    $(`#${cellIndex}`).css({'background-image': `url(${players[0].image})`});
     board[cellIndex] = 1;
     swapPlayer();
-
     idealMove();
-
   }
   if (whoseTurn === 2) {
-    $(`#${cellIndex}`).css({'background-image': `url(${chosenCharacters[1]})`});
+    $(`#${cellIndex}`).css({'background-image': `url(${players[1].image})`});
     board[cellIndex] = 2;
     swapPlayer();
-
   }
-
   setTimeout(finishTest, 200);
 }
 
@@ -62,13 +69,21 @@ function finishTest () {
 function gameover(i) {
   turnPage('#gameScreen', '#gameoverScreen');
 
-  setTimeout(function() {
-    if (i === 'draw') {
-      $('#gameResults').text(`The game was a draw`);
-    } else if (i === 1) {
-      $('#gameResults').text(`${playerOneName} has won!`);
-    } else if (i === 2) {
-      $('#gameResults').text(`${playerTwoName} has won!`);
-    }
-  }, 0);
+  if (i === 'draw') {
+    $('#gameResults').text(`The game was a draw`);
+  } else {
+    $('#gameResults').text(`${players[i-1].name} has won!`);
+    $('#gameoverScreen img').attr('src',`${players[i-1].image}`)
+    players[i-1].score ++;
+  }
+
+  $('#playerOneScore').text(players[0].score);
+  $('#playerTwoScore').text(players[1].score);
+
+  setTimeout(function(){
+    //reset board;
+    board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    $('.game-cell').css({'background-image': ''});
+    turnPage('#gameoverScreen', '#gameScreen');
+  }, 6000);
 }

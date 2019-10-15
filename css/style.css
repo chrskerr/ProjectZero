@@ -43,6 +43,11 @@ body {
 
 .playerNav {
   height: 100px;
+  text-align: center;
+}
+
+.scoreNav {
+  height: 100px;
   margin-bottom: 50px;
   text-align: center;
 }
@@ -53,6 +58,25 @@ body {
   width: 30%;
   height: 100px;
   line-height: 100px;
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+  background-color: lightgrey;
+}
+
+.scoreNav {
+  height: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.scoreNav p {
+  display: inline-block;
+  text-align: center;
+  width: 30%;
+  height: 100%;
+  line-height: 30px;
   font-size: 15px;
   margin: 0;
   padding: 0;
@@ -100,4 +124,8 @@ body {
 
 .hidden {
   display: none;
+}
+
+.large {
+  width: 200px;
 }

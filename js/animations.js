@@ -11,3 +11,21 @@ function turnPage (currentDiv, newDiv) {
 function evolve () {
 
 }
+
+let evolutions = {
+  charmander: {
+    levelOne: '../images/charmander.png',
+    levelTwo: '../images/charmeleon.png',
+    levelThree: '../images/charizard.png',
+  },
+  squirtle: {
+    levelOne: '../images/squirtle.png',
+    levelTwo: '../images/wartortle.png',
+    levelThree: '../images/blastoise.png',
+  },
+  bulbasaur: {
+    levelOne: '../images/bulbasaur.png',
+    levelTwo: '../images/ivysaur.png',
+    levelThree: '../images/venusaur.png',
+  }
+}
