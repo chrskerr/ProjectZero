@@ -12,8 +12,13 @@ $('.begin').click( function() {
   if (chooserClickCount = 2) {
     $('img.playerOne').attr('src', players[0].image);
     $('img.playerTwo').attr('src', players[1].image);
-    turnPage('#characterPage','#gameScreen');
+    turnPage('#characterPage','#gameModeChooser');
 }});
+
+$('.modeChooserButton').click( function() {
+  mode = $(this).attr('id');
+  turnPage('#gameModeChooser', '#gameScreen');
+});
 
 $('.characterchooser').click(function() {
   if (chooserClickCount === 0) {

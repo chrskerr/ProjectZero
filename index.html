@@ -9,6 +9,17 @@
 
   <body>
 
+    <!-- ROUND display -->
+    <div id='roundNumber' class='pageDiv hidden'>
+      <p>Round 1!</p>
+    </div>
+
+    <!-- FIGHT display -->
+    <div id='fight' class='pageDiv hidden'>
+      <p>FIGHT!</p>
+    </div>
+
+
     <!-- HTML code for the character selector page -->
     <div id='characterPage' class='pageDiv'>
       <h1>Please select a character to begin!</h1>
@@ -40,8 +51,14 @@
       </div>
     </div>
 
-    <!-- HTML for the game screen -->
+    <!-- Game Mode Screen -->
+    <div class='pageDiv hidden' id="gameModeChooser">
+      <div class='modeChooserButton' id='chooseTwoPlayer'>Two Player Mode</div>
+      <div class='modeChooserButton' id='chooseVsComputer'>Versus Computer</div>
+    </div>
 
+
+    <!-- HTML for the game screen -->
     <div id='gameScreen' class='pageDiv hidden'>
       <heading>
         <div class='playerNav'>
@@ -78,7 +95,7 @@
     </div>
 
     <!-- HTML for the gameover / evolution screen -->
-    <div id="gameoverScreen" class='pageDiv hidden'>
+    <div id="roundOverScreen" class='pageDiv hidden'>
       <p id='gameResults'></p>
       <img class='large'></img.
     </div>

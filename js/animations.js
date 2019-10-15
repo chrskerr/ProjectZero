@@ -8,24 +8,22 @@ function turnPage (currentDiv, newDiv) {
   setTimeout(function() {$(currentDiv).addClass('hidden')}, 450);
 }
 
-function evolve () {
+let loc;
 
+
+function evolve (playerRef) {
+  //find current evolution
+  evolutions.forEach(function(i,k){
+    i.forEach(function(j,l) {
+      if (j === players[playerRef - 1].image) loc = [k,l];
+    })
+  });
+
+  getKeyFrames 
+
+  if (evolutions[loc[0]][loc[1]+1]) players[playerRef - 1].image = evolutions[loc[0]][loc[1]+1];
+  $('img.playerOne').attr('src', players[0].image);
+  $('img.playerTwo').attr('src', players[1].image);
 }
 
-let evolutions = {
-  charmander: {
-    levelOne: '../images/charmander.png',
-    levelTwo: '../images/charmeleon.png',
-    levelThree: '../images/charizard.png',
-  },
-  squirtle: {
-    levelOne: '../images/squirtle.png',
-    levelTwo: '../images/wartortle.png',
-    levelThree: '../images/blastoise.png',
-  },
-  bulbasaur: {
-    levelOne: '../images/bulbasaur.png',
-    levelTwo: '../images/ivysaur.png',
-    levelThree: '../images/venusaur.png',
-  }
-}
+let evolutions = [['images/charmander.png', 'images/charmeleon.png', 'images/charizard.png'],['images/squirtle.png','images/wartortle.png','images/blastoise.png'],['images/bulbasaur.png','images/ivysaur.png','images/venusaur.png']];

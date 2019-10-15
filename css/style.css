@@ -129,3 +129,18 @@ body {
 .large {
   width: 200px;
 }
+
+#gameModeChooser {
+  height: 100vh;
+}
+
+.modeChooserButton {
+  width: 30%;
+  margin: 5% 2%;
+  height: 65%;
+  background-color: lightgrey;
+  line-height: 450px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
