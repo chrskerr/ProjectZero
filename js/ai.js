@@ -10,15 +10,20 @@ function nextMove (aiDifficulty) {
 function idealMove () {
   player = 2;
   let moveWeights = [-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000];
+  let countList = [0,0,0,0,0,0,0,0,0];
   let tempBoard = [...board];
   let playIndex = [];
   tempBoard.forEach(function(i,j){if (i === 0) playIndex.push(j)});
   let currentPlays = [...playIndex];
 
-  minMaxFirst(player, tempBoard, currentPlays, moveWeights);
+  minMaxFirst(player, tempBoard, currentPlays, moveWeights, countList, 1);
 
-
-  let bestChoice = [-100000, 0];
+  let countTotal = 0;
+  countList.forEach(function(j,i){countTotal += parseInt(countList[i])})
+  console.log(countList);
+  console.log(countTotal);
+  console.log(moveWeights);
+  let bestChoice = [-100000000, 11];
 
   moveWeights.forEach(function(j,i) {
     if (moveWeights[i] > bestChoice[0]) {
@@ -31,37 +36,41 @@ function idealMove () {
 }
 
 
-function minMaxFirst(player, tempBoard, currentPlays, moveWeights) {
+function minMaxFirst(player, loopBoard, currentPlays, moveWeights, countList, depth) {
   currentPlays.forEach(function(j) {
+    countList[j] ++;
     moveWeights[j] = 0;
-    let loopBoard = [...tempBoard];
-    loopBoard[j] = player;
+    let parentPlayIndex = j;
+    let tmpBoard = [];
+    tmpBoard = [...loopBoard];
+    tmpBoard[j] = player;
     player = 1;
     let newPlays = [];
-    let parentPlayIndex = j;
-    loopBoard.forEach(function(i,j){if (i === 0) newPlays.push(j)});
-    minMax(player, loopBoard, newPlays, parentPlayIndex, moveWeights);
+    tmpBoard.forEach(function(i,j) {if (i === 0) newPlays.push(j)});
+    minMax(player, tmpBoard, newPlays, parentPlayIndex, moveWeights, countList, depth + 1);
   });
 }
 
-function minMax(player, loopBoard, currentPlays, parentPlayIndex, moveWeights) {
+function minMax(player, loopBoard, currentPlays, parentPlayIndex, moveWeights, countList, depth) {
   if (terminalStateTest(loopBoard) === 2) {
-    moveWeights[parentPlayIndex] ++;
+    moveWeights[parentPlayIndex] = moveWeights[parentPlayIndex] + 10;
   } else if (terminalStateTest(loopBoard) === 1) {
-    moveWeights[parentPlayIndex] --;
-  } else if (terminalStateTest(loopBoard) === 0) {
-  } else {
+    moveWeights[parentPlayIndex] = moveWeights[parentPlayIndex] - 10;
+  } else if (currentPlays.length > 0) {
     currentPlays.forEach(function(j) {
+      countList[j] ++;
       let tmpBoard = [];
       tmpBoard = [...loopBoard];
       tmpBoard[j] = player;
       if (player === 1) {player = 2} else if (player === 2) {player = 1}
       let newPlays = [];
-      tmpBoard.forEach(function(i,j) {if (i === 0) newPlays.push(j)});
-      minMax(player, tmpBoard, newPlays, parentPlayIndex, moveWeights);
+      tmpBoard.forEach(function(i,j) {if (i === 0) newPlays.push(j);});
+      if (newPlays.length +1 != currentPlays.length) console.log("true")
+      minMax(player, tmpBoard, newPlays, parentPlayIndex, moveWeights, countList, depth + 1);
     });
   }
 }
+
 
 function terminalStateTest(tempBoard) {
   let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];

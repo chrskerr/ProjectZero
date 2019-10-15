@@ -50,6 +50,7 @@ function finishTest () {
     } else {
       if (board[test[0]] === board[test[1]] && board[test[1]] === board[test[2]])
       gameover(board[test[0]]);
+      return;
     }});
 
   // test for draw
