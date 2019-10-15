@@ -9,7 +9,7 @@ $('.game-cell').click(function() {
 
 let chooserClickCount = 0;
 $('.begin').click( function() {
-  if (chooserClickCount = 2) {
+  if (chooserClickCount === 2) {
     $('img.playerOne').attr('src', players[0].image);
     $('img.playerTwo').attr('src', players[1].image);
     turnPage('#characterPage','#gameModeChooser');

@@ -27,16 +27,24 @@ function recordChoice (cellIndex) {
     $(`#${cellIndex}`).css({'background-image': `url(${players[0].image})`});
     board[cellIndex] = 1;
     swapPlayer();
-    if (mode === 'chooseVsComputer') {
-      setTimeout(idealMove, 550);
-    }
 
   } else if (whoseTurn === 2) {
     $(`#${cellIndex}`).css({'background-image': `url(${players[1].image})`});
     board[cellIndex] = 2;
     swapPlayer();
   }
-  setTimeout(finishTest, 200);
+
+  setTimeout(function() {
+    let outcome = '';
+    if (drawTest()) outcome = drawTest();
+    if (threeTest()) outcome = threeTest();
+
+    if (outcome) {
+      roundOver(outcome);
+    } else {
+      if (whoseTurn === 2 && mode === 'chooseVsComputer') idealMove();
+    }
+  }, 200);
 }
 
 function swapPlayer () {
@@ -53,20 +61,25 @@ function swapPlayer () {
   }
 }
 
-function finishTest () {
+function drawTest () {
+    let emptyCount = 0;
+    board.forEach(function(i) {if (i === 0) emptyCount++;});
+    if (emptyCount === 0) {
+    return 'draw';
+  }
+  return '';
+}
+
+function threeTest() {
   let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+  let outcome = '';
   testList.forEach( function(test) {
     if (board[test[0]] === 0 || board[test[1]] === 0 || board[test[2]] === 0) {
-    } else {
-      if (board[test[0]] === board[test[1]] && board[test[1]] === board[test[2]])
-      roundOver(board[test[0]]);
-      return;
-    }});
-
-  // test for draw
-  let emptyCount = 0;
-  board.forEach(function(i) {if (i === 0) emptyCount++;});
-  if (emptyCount === 0) roundOver('draw');
+    } else if (board[test[0]] === board[test[1]] && board[test[1]] === board[test[2]]) {
+      outcome = board[test[0]];
+    }
+});
+  return outcome;
 }
 
 function roundOver(i) {

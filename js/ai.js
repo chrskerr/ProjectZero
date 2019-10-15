@@ -75,20 +75,21 @@ function minMax(player, loopBoard, currentPlays, parentPlayIndex, moveWeights, c
 function terminalStateTest(tempBoard) {
   let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
 
-  let output;
+  let output = 0;
   testList.forEach(function(test) {
     if (tempBoard[test[0]] === 0 || tempBoard[test[1]] === 0 || tempBoard[test[2]] === 0) {
     } else if (tempBoard[test[0]] === tempBoard[test[1]] && tempBoard[test[2]] === tempBoard[test[1]]) {
       output = tempBoard[test[1]]}
   });
-  if (output) return output;
-
-  // test for draw
-  let emptyCount = 0;
-  tempBoard.forEach(function(i) {if (i === 0) emptyCount++;});
-  if (emptyCount === 0) {
-    return 0;
+  if (output > 0) {
+    return output;
+  } else {
+    // test for draw
+    let emptyCount = 0;
+    tempBoard.forEach(function(i) {if (i === 0) emptyCount++;});
+    if (emptyCount === 0) {
+      return 0;
+    }
   }
-
   return -1;
 }
