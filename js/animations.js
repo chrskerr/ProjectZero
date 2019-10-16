@@ -108,4 +108,4 @@ function randomPokeDrop() {
   $('#pokeBucket').append(newPic);
 }
 
-let pokeDropTimer = setInterval(randomPokeDrop, 25);
+let pokeDropTimer = setInterval(randomPokeDrop, 50);
