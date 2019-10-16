@@ -37,6 +37,6 @@ $('.characterchooser').click(function() {
       $('img.playerOne').attr('src', players[0].image);
       $('img.playerTwo').attr('src', players[1].image);
       turnPage('#characterPage','#gameModeChooser');
-    }, 2000);
+    }, 600);
   }
 })

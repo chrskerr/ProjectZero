@@ -63,9 +63,10 @@ function minMax(player, loopBoard, currentPlays, parentPlayIndex, moveWeights, c
   // loop logic, will also include a pass-up score to tier above
     currentPlays.forEach(function(j) {
       if (player === 1) {player = 2} else if (player === 2) {player = 1}
-      countList[j] ++;
-      let tmpBoard = [];
-      tmpBoard = [...loopBoard];
+      countList[j] ++; //this is counting number of loops iterated
+
+      let tmpBoard = [...loopBoard]; //create a new board that can be edited without
+      tmpBoard = ;
       tmpBoard[j] = player;
       let newPlays = [];
       tmpBoard.forEach(function(i,j) {if (i === 0) newPlays.push(j);});

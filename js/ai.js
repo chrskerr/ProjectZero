@@ -9,74 +9,82 @@ function nextMove (aiDifficulty) {
 
 function idealMove () {
   player = 2;
-  let moveWeights = [-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000];
   let countList = [0,0,0,0,0,0,0,0,0];
   let tempBoard = [...board];
   let playIndex = [];
   tempBoard.forEach(function(i,j){if (i === 0) playIndex.push(j)});
   let currentPlays = [...playIndex];
 
-  minMaxFirst(player, tempBoard, currentPlays, moveWeights, countList, 1);
+  let moveWeights = minMaxFirst(player, tempBoard, currentPlays, countList);
 
   let countTotal = 0;
   countList.forEach(function(j,i){countTotal += parseInt(countList[i])})
-  console.log(countList);
-  console.log(countTotal);
-  console.log(moveWeights);
-  let bestChoice = [-100000000, 11];
 
-  moveWeights.forEach(function(j,i) {
-    if (moveWeights[i] > bestChoice[0]) {
-      bestChoice = [moveWeights[i], i];
-    }
+  // seperate weighting logic
+  moveWeights[4] ++;
+  let bestChoice = [0,-1000]; // [index, weight]
+  console.log(moveWeights)
+
+  moveWeights.forEach(function(j, i) {
+    if (j > bestChoice[1]) bestChoice = [i,j];
   })
 
-  recordChoice(bestChoice[1]);
 
+  recordChoice(bestChoice[0]);
 }
 
 
-function minMaxFirst(player, loopBoard, currentPlays, moveWeights, countList, depth) {
+function minMaxFirst(player, loopBoard, currentPlays, countList) {
+  let minMaxOutput = [-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000]; //this should finish as an array of score of all below moves, typically used to pick best score, here pass whole array
   currentPlays.forEach(function(j) {
     countList[j] ++;
-    moveWeights[j] = 0;
-    let parentPlayIndex = j;
-    let tmpBoard = [];
-    tmpBoard = [...loopBoard];
+    let tmpBoard = [...loopBoard];
     tmpBoard[j] = player;
     player = 1;
     let newPlays = [];
     tmpBoard.forEach(function(i,j) {if (i === 0) newPlays.push(j)});
-    minMax(player, tmpBoard, newPlays, parentPlayIndex, moveWeights, countList, depth + 1);
-  });
+
+    minMaxOutput[j] = minMax(player, tmpBoard, newPlays, countList, 1);
+    // this function should output the moveWeights for each available move to it, this will allow for difficult selector later
+
+  })
+  return minMaxOutput;
 }
 
-function minMax(player, loopBoard, currentPlays, parentPlayIndex, moveWeights, countList, depth) {
-
+function minMax(prevPlayer, loopBoard, currentPlays, countList, depth) {
   // terminal state exit logic
-  if (terminalStateTest(loopBoard) === 2) {
-    moveWeights[parentPlayIndex] = moveWeights[parentPlayIndex] + 10;
-  } else if (terminalStateTest(loopBoard) === 1) {
-    moveWeights[parentPlayIndex] = moveWeights[parentPlayIndex] - 10;
-  } else if (currentPlays.length > 0) {
+  if (terminalStateTest(loopBoard) === 1) {
+    return 10 - depth;
+  } else if (terminalStateTest(loopBoard) === 2) {
+    return -10 + depth;
+  } else if (terminalStateTest(loopBoard) === 0) {
+      return 0;
+  } else {
+    let output;
+    if (prevPlayer === 2) output = 10;
+    if (prevPlayer === 1) output = -10;
 
-  // loop logic, will also include a pass-up score to tier above
-    currentPlays.forEach(function(j) {
-      if (player === 1) {player = 2} else if (player === 2) {player = 1}
-      countList[j] ++;
-      let tmpBoard = [];
-      tmpBoard = [...loopBoard];
-      tmpBoard[j] = player;
-      let newPlays = [];
+    currentPlays.forEach( function(j) {
+      //build the minMax input info
+      countList[j] ++; //this is counting number of loops iterated
+      let tmpBoard = [...loopBoard]; //create a new board that can be edited without impacting board in tier above
+      tmpBoard[j] = player; //log the current play
+      let newPlays = []; //create a new combinations list to pass downward
       tmpBoard.forEach(function(i,j) {if (i === 0) newPlays.push(j);});
-      if (newPlays.length +1 != currentPlays.length) console.log("true")
-      minMax(player, tmpBoard, newPlays, parentPlayIndex, moveWeights, countList, depth + 1);
-    });
 
-
+      if (prevPlayer === 2) { // minimise output
+        let player = 1;
+        let tmp = minMax(player, tmpBoard, newPlays, countList, depth++);
+        if (output > tmp) output = tmp;
+      } else if (prevPlayer === 1) { // maximise output
+        let player = 2;
+        let tmp = minMax(player, tmpBoard, newPlays, countList, depth++);
+        if (output < tmp) output = tmp;
+      }
+    })
+    return output;
   }
 }
-
 
 function terminalStateTest(tempBoard) {
   let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
