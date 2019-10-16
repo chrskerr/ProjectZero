@@ -7,8 +7,10 @@ $('.game-cell').click(function() {
 });
 
 $('#instructions button').click( function() {
-  mode = $(this).attr('id');
   turnPage('#instructions', '#gameModeChooser');
+  clearInterval(pokeDropTimer);
+  $('#pokeBucket img').fadeOut(700);
+  setTimeout(function() {$('#pokeBucket img').addClass('hidden')},1000);
 })
 
 
