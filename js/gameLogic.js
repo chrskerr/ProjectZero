@@ -85,34 +85,37 @@ function threeTest() {
 function roundOver(i) {
   turnPage('#gameScreen', '#roundOverScreen');
 
+  let finished = false;
+
   if (i === 'draw') {
     $('#gameResults').text(`The game was a draw`);
   } else {
     $('#gameResults').text(`${players[i-1].name} has won!`);
     $('#roundOverScreen img').attr('src',`${players[i-1].image}`)
     players[i-1].score ++;
+    if (evolve(i) === 'top') finished = true;
   }
 
-  $('#playerOneScore').text(players[0].score);
-  $('#playerTwoScore').text(players[1].score);
-  roundCount++;
-  $('#roundNumber p').text(`Round ${roundCount}!`)
+  if (!finished) {
+    $('#playerOneScore').text(players[0].score);
+    $('#playerTwoScore').text(players[1].score);
+    roundCount++;
+    $('#roundNumber p').text(`Round ${roundCount}!`)
 
-  evolve(i);
+    setTimeout(function(){
+      //reset board;
+      board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      $('.game-cell').css({'background-image': ''});
+      whoseTurn = 1;
+      $('#playerOne').animate({'font-size': '45px'}, 200)
+      $('#playerTwo').animate({'font-size': '15px'}, 200)
 
-  setTimeout(function(){
-    //reset board;
-    board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    $('.game-cell').css({'background-image': ''});
-    whoseTurn = 1;
-    $('#playerOne').animate({'font-size': '45px'}, 200)
-    $('#playerTwo').animate({'font-size': '15px'}, 200)
+      turnPage('#roundOverScreen', '#roundNumber')
 
-    turnPage('#roundOverScreen', '#roundNumber')
+      setTimeout(function() {turnPage('#roundNumber', '#fight')}, 1200);
 
-    setTimeout(function() {turnPage('#roundNumber', '#fight')}, 1200);
+      setTimeout(function() {turnPage('#fight', '#gameScreen')}, 2400);
 
-    setTimeout(function() {turnPage('#fight', '#gameScreen')}, 2400);
-
-  }, 4000);
+    }, 4000);
+  }
 }

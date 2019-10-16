@@ -19,8 +19,8 @@ function evolve (playerRef) {
     })
   });
 
+  players[playerRef - 1].image = evolutions[loc[0]][loc[1]+1];
 
-  if (evolutions[loc[0]][loc[1]+1]) players[playerRef - 1].image = evolutions[loc[0]][loc[1]+1];
 
   setTimeout(function(){
     $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
@@ -92,6 +92,9 @@ function evolve (playerRef) {
 
   $('img.playerOne').attr('src', players[0].image);
   $('img.playerTwo').attr('src', players[1].image);
+
+  if (!evolutions[loc[0]][loc[1]+2]) return 'top'
+
 }
 
 let evolutions = [['images/charmander.png', 'images/charmeleon.png', 'images/charizard.png'],['images/squirtle.png','images/wartortle.png','images/blastoise.png'],['images/bulbasaur.png','images/ivysaur.png','images/venusaur.png']];
