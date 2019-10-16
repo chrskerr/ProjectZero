@@ -1,6 +1,6 @@
 // a place for all declarations and variables
 let whoseTurn = 1;
-let mode = '';
+let mode;
 let roundCount = 1;
 let board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let players = [
@@ -42,7 +42,7 @@ function recordChoice (cellIndex) {
     if (outcome) {
       roundOver(outcome);
     } else {
-      if (whoseTurn === 2 && mode === 'chooseVsComputer') idealMove();
+      if (whoseTurn === 2 && mode === 'computer') idealMove();
     }
   }, 200);
 }
