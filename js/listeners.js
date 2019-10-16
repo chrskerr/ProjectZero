@@ -25,9 +25,9 @@ $('.characterchooser').click(function() {
 function chooseCharacter(id) {
   if (chooserClickCount === 0) {
     players[0].image = id;
-    $('.garyChosen').css({'display': 'inline-block'});
-    $('img.garyChosen').attr('src', players[0].image);
-    $('#lineTwo').text('Ash, now your turn!');
+    $('.ashChosen').css({'display': 'inline-block'});
+    $('img.ashChosen').attr('src', players[0].image);
+    $('#lineTwo').text('Gary, now your turn!');
     chooserClickCount++;
 
 
@@ -36,8 +36,8 @@ function chooseCharacter(id) {
   } else if (chooserClickCount === 1) {
     if (id === players[0].image) return false;
     players[1].image = id;
-    $('.ashChosen').css({'display': 'inline-block'});
-    $('img.ashChosen').attr('src', players[1].image);
+    $('.garyChosen').css({'display': 'inline-block'});
+    $('img.garyChosen').attr('src', players[1].image);
     $('#lineTwo').text('READY TO FIGHT!');
     chooserClickCount++;
 
@@ -54,14 +54,14 @@ function chooseCharacter(id) {
 }
 
 function computerPick(id) {
-  let pick = Math.floor(Math.random() * 3);
+  // let pick = Math.floor(Math.random() * 3);
   let choice;
-  if (pick === 0) choice = 'images/charmander.png'
-  if (pick === 1) choice = 'images/bulbasaur.png'
-  if (pick === 2) choice = 'images/squirtle.png'
-    if (choice === id) {
-      computerPick(id);
-    }
+  if (id === 'images/bulbasaur.png') choice = 'images/charmander.png'
+  if (id === 'images/charmander.png') choice = 'images/squirtle.png'
+  if (id === 'images/squirtle.png') choice = 'images/bulbasaur.png'
+    // if (choice === id) {
+    //   computerPick(id);
+    // }
 
   setTimeout(function(){chooseCharacter(choice)}, 250)
 }

@@ -6,13 +6,13 @@ let board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let players = [
   {
   ref: 1,
-  name: 'Gary',
+  name: 'Ash',
   image: '',
   score: 0,
 },
 {
   ref: 2,
-  name: 'Ash',
+  name: 'Gary',
   image: '',
   score: 0,
 },
