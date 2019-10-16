@@ -44,8 +44,8 @@ function chooseCharacter(id) {
   }
 
   if (chooserClickCount === 2) {
+    themeSong.play();
     setTimeout(function() {
-
       $('img.playerOne').attr('src', players[0].image);
       $('img.playerTwo').attr('src', players[1].image);
       turnPage('#characterPage','#gameScreen');

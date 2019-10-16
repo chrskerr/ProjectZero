@@ -18,6 +18,8 @@ let players = [
 },
 ];
 
+let themeSong = new Audio('sounds/battleVsTrainer_trim.mov');
+
 $('#playerOne').animate({'font-size': '45px'}, 0)
 $('p#playerOne').text(players[0].name);
 $('p#playerTwo').text(players[1].name);
