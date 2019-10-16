@@ -46,6 +46,7 @@ function chooseCharacter(id) {
   }
 
   if (chooserClickCount === 2) {
+    // backgroundMusic.pause();
     themeSong.play();
     setTimeout(function() {
       $('img.playerOne').attr('src', players[0].image);

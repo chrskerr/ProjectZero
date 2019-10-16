@@ -19,6 +19,9 @@ let players = [
 ];
 
 let themeSong = new Audio('sounds/battleVsTrainer_trim.mov');
+// let backgroundMusic = new Audio('sounds/soundEffectCollection.mp3');
+//
+// backgroundMusic.play();
 
 $('#playerOne').animate({'font-size': '45px'}, 0)
 $('p#playerOne').text(players[0].name);
@@ -91,6 +94,7 @@ function roundOver(i) {
 
   if (i === 'draw') {
     $('#gameResults').text(`The game was a draw`);
+    $('#roundOverScreen img').attr('src',``)
   } else {
     $('#gameResults').text(`${players[i-1].name} has won!`);
     $('#roundOverScreen img').attr('src',`${players[i-1].image}`)

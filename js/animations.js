@@ -8,10 +8,10 @@ function turnPage (currentDiv, newDiv) {
   setTimeout(function() {$(currentDiv).addClass('hidden')}, 750);
 }
 
-let loc;
-
 
 function evolve (playerRef) {
+  let loc;
+
   //find current evolution
   evolutions.forEach(function(i,k){
     i.forEach(function(j,l) {
@@ -100,20 +100,12 @@ function evolve (playerRef) {
 let evolutions = [['images/charmander.png', 'images/charmeleon.png', 'images/charizard.png'],['images/squirtle.png','images/wartortle.png','images/blastoise.png'],['images/bulbasaur.png','images/ivysaur.png','images/venusaur.png']];
 
 function randomPokeDrop() {
-  //pick random x & y
   let x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
   let y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
   let pic = Math.floor(Math.random() * 3);
-
-
-  // if (x > 0.2 * $(window).width() && x < 0.8 * $(window).width() && y < 0.6 * $(window).height() ) {
-
   let newPic = $(`<img src=${evolutions[pic][0]}></img>`);
   newPic.css('left', `${x}px`).css('top', `${y}px`);
-  // console.log('left', `${x}px`)
   $('#pokeBucket').append(newPic);
-  // console.log('loop')
-// }
 }
 
 let pokeDropTimer = setInterval(randomPokeDrop, 25);

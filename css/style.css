@@ -46,12 +46,8 @@ body {
 .playerNav {
   height: 100px;
   text-align: center;
-}
-
-.scoreNav {
-  height: 100px;
   margin-bottom: 50px;
-  text-align: center;
+
 }
 
 .playerNav p {
@@ -132,6 +128,7 @@ body {
   width: 30%;
   margin: 100px 2%;
   height: 65%;
+  max-height: 800px;
   background-color: lightgrey;
   line-height: 450px;
   text-align: center;
@@ -150,10 +147,15 @@ body {
   margin-top: 100px;
   display: block;
   position: relative;
+  background-color: rgba(255,255,255,0.75);
 }
 
-#characterPage {
+#characterPage h1 {
   margin-top: 100px;
+}
+
+#characterPage img {
+  padding: 25px 0px;
 }
 
 #pokeBucket img {
