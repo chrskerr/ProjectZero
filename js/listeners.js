@@ -6,11 +6,13 @@ $('.game-cell').click(function() {
   }
 });
 
+$('#instructions button').click( function() {
+  mode = $(this).attr('id');
+  turnPage('#instructions', '#gameModeChooser');
+})
+
 
 let chooserClickCount = 0;
-// $('.begin').click( function() {
-//   });
-//
 $('.modeChooserButton').click( function() {
   mode = $(this).attr('id');
   turnPage('#gameModeChooser', '#characterPage');

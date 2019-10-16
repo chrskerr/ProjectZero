@@ -128,7 +128,7 @@ body {
 
 .modeChooserButton {
   width: 30%;
-  margin: 5% 2%;
+  margin: 60px 2%;
   height: 65%;
   background-color: lightgrey;
   line-height: 450px;
@@ -138,6 +138,14 @@ body {
 }
 
 .noInteract {
-  margin-top: 300px;
+  margin-top: 200px;
   font-size: 28px;
+}
+
+#instructions {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 60px;
+  display: block;
+  position: relative;
 }
