@@ -136,3 +136,8 @@ body {
   display: inline-block;
   vertical-align: middle;
 }
+
+.noInteract {
+  margin-top: 300px;
+  font-size: 28px;
+}
