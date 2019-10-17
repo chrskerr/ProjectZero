@@ -8,6 +8,7 @@ function nextMove (aiDifficulty) {
 }
 
 function idealMove () {
+  console.log('computer called')
   let prevPlayer = 1;
   let countList = [0,0,0,0,0,0,0,0,0];
   let tempBoard = [...board];

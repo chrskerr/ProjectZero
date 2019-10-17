@@ -2,18 +2,14 @@
 
 function turnPage (currentDiv, newDiv) {
   $(newDiv).css({'left': $(window).width() + 10}).removeClass('hidden')
-
   setTimeout(function() {$(currentDiv).animate({'left': (-1) * $(window).width()}, 700);}, 100);
-
   setTimeout(function() {$(newDiv).animate({'left': `0`}, 700);}, 101);
-
   setTimeout(function() {$(currentDiv).addClass('hidden')}, 750);
 }
 
 
 function evolve (playerRef) {
   let loc;
-
   let playerIndex = playerRef - 1; //return to 0
   let currentTree = players[playerIndex].tree;
   let score = players[playerIndex].score;

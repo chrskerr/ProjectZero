@@ -99,6 +99,16 @@ body {
   margin: auto;
 }
 
+img.ashChosen{
+  height: 150px;
+  width: 150px;
+}
+
+img.garyChosen{
+  height: 125px;
+  width: 125px;
+}
+
 .begin {
   margin: 0% 40%;
   width: 9%;
@@ -161,7 +171,7 @@ body {
 }
 
 .tree {
-  max-width: 160px;
+  max-width: 190px;
   height: auto;
   margin: auto;
   position: absolute;
@@ -178,20 +188,20 @@ body {
 }
 
 .treeImg {
-  height: 100px;
-  width: 100px;
-  margin: 20px;
+  height: 150px;
+  width: 150px;
+  margin: 0px 20px;
 }
 
 .grey {
   filter: grayscale(100%);
-  height: 50px;
-  width: 50px;
+  /* height: 50px;
+  width: 50px; */
 }
 
 #nameInput {
   display: inline-block;
-  width: 5em;
+  width: 3em;
   font-family: inherit;
   font-size: 1.5em;
 }
@@ -202,5 +212,53 @@ body {
 }
 
 #newGame {
-  margin: 300px;
+  font-size: 1em;
 }
+
+
+#oldPokemon {
+  width: 200px;
+  height: 200px;
+}
+
+.gameOverScreen > div {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  margin: auto;
+}
+
+#musicPlayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  z-index: 100;
+}
+
+#musicPlayer > * {
+  height: 45%;
+  line-height: 35px;
+  display: inline;
+  margin: 10px 5px 0px 0px;
+  padding: 0;
+  position: relative;
+  vertical-align: middle;
+}
+
+
+
+#currentSong {
+  /* animation: slidein 4s linear infinite; */
+  font-size: 0.7em;
+  /* transform: translateX(100%); */
+}
+
+/* @keyframes slidein {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+} */

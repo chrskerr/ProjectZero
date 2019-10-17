@@ -2,14 +2,10 @@
 // also for all page turns and pageflow logic
 
 $('.game-cell').click(function() {
-  if (mode === 'computer') {
-    if (whoseTurn === 1) {
-      recordChoice($(this).attr('id'));
-    }
-  } else {
-    recordChoice($(this).attr('id'));
-  }
-});
+  if (mode === 'computer' && whoseTurn === 2) return;
+  recordChoice($(this).attr('id'));
+  console.log('click')
+})
 
 $('#instructions button').click( function() {
   turnPage('#instructions', '#gameModeChooser');
@@ -21,8 +17,8 @@ $('#instructions button').click( function() {
 $('#newGame').click(newGameReset);
 
 $('#nameInput').on('keyup',function(){
-  if ($(this).val().length * 0.7 > 5) {
-    $('#nameInput').width(`${$(this).val().length * 0.7}em`)
+  if ($(this).val().length * 0.65 > 3) {
+    $('#nameInput').width(`${$(this).val().length * 0.65}em`)
   }
 })
 
@@ -44,11 +40,9 @@ function chooseCharacter(id) {
     $('img.ashChosen').attr('src', players[0].image);
     $('#lineTwo').text('now your turn!');
     $('#nameInput').val('Gary');
-    $('#nameInput').width(`5em`);
+    $('#nameInput').width(`3em`);
     $('p.ashChosenText').text(`${players[0].name} has chosen:`)
     chooserClickCount++;
-
-
     if (mode === 'computer') computerPick(id)
 
   } else if (chooserClickCount === 1) {
@@ -62,13 +56,10 @@ function chooseCharacter(id) {
     $('#lineTwo').text('READY TO FIGHT!');
     $('p.garyChosenText').text(`${players[1].name} has chosen:`)
     chooserClickCount++;
-
   }
 
   if (chooserClickCount === 2) {
-
     themeSong.play();
-
     setTimeout(function() {
       updateTrees();
       turnPage('#characterPage','#gameScreen');
@@ -81,8 +72,7 @@ function computerPick(id) {
   if (id === 'images/bulbasaur.png') choice = 'images/charmander.png'
   if (id === 'images/charmander.png') choice = 'images/squirtle.png'
   if (id === 'images/squirtle.png') choice = 'images/bulbasaur.png'
-
-  setTimeout(function(){chooseCharacter(choice)}, computerResponseTime)
+  setTimeout(function(){chooseCharacter(choice)}, 650)
 }
 
 function draw() {
@@ -91,6 +81,7 @@ function draw() {
 }
 
 function someoneWon(i) {
+  console.log('someone won called')
   players[i-1].score ++;
   if (players[i-1].score === 3) {
     turnPage('#gameScreen', '#gameOverScreen');
@@ -100,16 +91,15 @@ function someoneWon(i) {
     $('#gameResults').text(`${players[i-1].name} has won!`);
     $('#roundOverScreen img').attr('src',`${players[i-1].image}`)
     evolve(i);
-
     setTimeout(function(){newRound('#roundOverScreen')}, 4000);
   }
 }
 
 function newRound (currentPage) {
+  console.log('new round called')
   //reset board;
   board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   $('.game-cell').css({'background-image': ''});
-
   roundCount++;
   $('#roundNumber p').text(`Round ${roundCount}!`)
   turnPage(currentPage, '#roundNumber')
@@ -133,42 +123,32 @@ function newRound (currentPage) {
 
   setTimeout(function() {
     if (mode === 'computer' && whoseTurn === 2) idealMove();
-  }, 3400);
+  }, 3100);
 
   updateTrees();
 }
 
 function newGameReset () {
   $('.game-cell').css({'background-image': ''});
+  $('#playerTwo').animate({'font-size': '15px'}, 200)
+  $('#playerOne').animate({'font-size': '15px'}, 200)
 
   // ensure we are on player one
-  if (whoStarted === 2) {
-    whoStarted = 1;
-    if (whoseTurn = 2) {
-      swapPlayer();
-    }
-  }
+  whoStarted = 1;
+  whoseTurn = 1;
+
+  themeSong.pause();
 
   mode = '';
   roundCount = 1;
   board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-  players = [
-    {
-    ref: 1,
-    name: 'Ash',
-    image: '',
-    score: 0,
-    tree: '',
-  },
-  {
-    ref: 2,
-    name: 'Gary',
-    image: '',
-    score: 0,
-    tree: '',
-  },
-  ];
+  players[0].score = 0;
+  players[1].score = 0;
+
+
   chooserClickCount = 0;
+  $('#nameInput').val('Ash').show();
+  $('#lineTwo').text('can select first!');
   $('.ashChosen').hide();
   $('.garyChosen').hide();
   turnPage("#gameOverScreen",'#gameModeChooser')
@@ -188,5 +168,15 @@ function updateTrees() {
   $('#playerOne').animate({'font-size': '45px'}, 0)
   $('p#playerOne').text(players[0].name);
   $('p#playerTwo').text(players[1].name);
-
 }
+
+// // music machine
+const themeSong = new Audio('sounds/battleVsTrainer_trim.mov');
+
+$('#playSong').click(function(){
+  themeSong.play();
+})
+
+$('#pauseSong').click(function(){
+  themeSong.load();
+})
