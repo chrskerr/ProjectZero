@@ -1,9 +1,10 @@
 // a place for all declarations and variables
-//
+// only core logic code, except AI, all animations, page turns, resets, and listeners in pageFlow.js
 
 let whoseTurn = 1;
 let whoStarted = 1;
 let mode;
+let chooserClickCount = 0; // for characterchooser listener logic
 let roundCount = 1;
 let board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let players = [
