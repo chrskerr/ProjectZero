@@ -21,7 +21,7 @@ function idealMove () {
   countList.forEach(function(j,i){countTotal += parseInt(countList[i])})
 
   // seperate weighting logic
-  // moveWeights[4] += 10;
+  moveWeights[4] += 10;
   let bestChoice = [0,-1000]; // [index, weight]
   console.log(moveWeights)
 
@@ -37,7 +37,7 @@ function idealMove () {
 function minMaxFirst(prevPlayer, loopBoard, currentPlays, countList) {
   let minMaxOutput = [-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000,-1000000]; //this should finish as an array of score of all below moves, typically used to pick best score, here pass whole array
   currentPlays.forEach(function(j) {
-    if (prevPlayer === 1) {player = 2} else if (prevPlayer === 2) {player = 1}
+    player = 2;
     countList[j] ++;
     let tmpBoard = [...loopBoard];
     tmpBoard[j] = player;
@@ -53,13 +53,13 @@ function minMaxFirst(prevPlayer, loopBoard, currentPlays, countList) {
 function minMax(prevPlayer, loopBoard, currentPlays, countList, depth) {
   // terminal state exit logic
   if (terminalStateTest(loopBoard) === 2) {
-    return 1;
+    return (10 - depth);
   } else if (terminalStateTest(loopBoard) === 1) {
-    return  -1;
+    return  (depth - 10);
   } else if (terminalStateTest(loopBoard) === 0) {
       return 0;
   } else {
-    let outputTotal;
+    let output;
 
     //flip player
     if (prevPlayer === 1) {player = 2} else if (prevPlayer === 2) {player = 1}
@@ -76,16 +76,41 @@ function minMax(prevPlayer, loopBoard, currentPlays, countList, depth) {
       outputTmp.push(minMax(player, tmpBoard, newPlays, countList, depth++));
     })
 
-    // if (depth < 5) console.log(loopBoard + "\b" + depth + ': ' + outputTmp);
+    if (depth < 5) console.log(loopBoard + "\b" + depth + ': ' + outputTmp);
 
     outputTmp.forEach(function(i){
-      if (!outputTotal) {
-        outputTotal = i;
-      } else {outputTotal = outputTotal + i}
+      if (!output) {
+        output = i;
+      } else if (prevPlayer === 2 && i < output) {
+        output = i;
+      } else if (prevPlayer === 1 && i > output) {
+        output = i;
+      }
     })
-
-    output = outputTotal / outputTmp.length;
 
     return output;
   }
+}
+
+function terminalStateTest(tempBoard) {
+  let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+
+  let output;
+
+  testList.forEach(function(test) {
+    if (tempBoard[test[0]] === 0 || tempBoard[test[1]] === 0 || tempBoard[test[2]] === 0) { //ignore
+    } else if (tempBoard[test[0]] === tempBoard[test[1]] && tempBoard[test[2]] === tempBoard[test[1]]) {
+      output = tempBoard[test[1]]}
+  });
+
+  if (output) {
+    return output;
+  } else {
+    // test for draw
+    let emptyCount = 0;
+    tempBoard.forEach(function(i) {if (i === 0) emptyCount++;});
+    if (emptyCount === 0) return 0
+  }
+
+  return false;
 }

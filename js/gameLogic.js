@@ -1,5 +1,8 @@
 // a place for all declarations and variables
+//
+
 let whoseTurn = 1;
+let whoStarted = 1;
 let mode;
 let roundCount = 1;
 let board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -9,25 +12,34 @@ let players = [
   name: 'Ash',
   image: '',
   score: 0,
+  tree: '',
 },
 {
   ref: 2,
   name: 'Gary',
   image: '',
   score: 0,
+  tree: '',
 },
 ];
 
+let trees = {
+  charmander: ['images/charmander.png', 'images/charmeleon.png', 'images/charizard.png'],
+  squirtle: ['images/squirtle.png','images/wartortle.png','images/blastoise.png'],
+  bulbasaur: ['images/bulbasaur.png','images/ivysaur.png','images/venusaur.png']
+}
+
 let themeSong = new Audio('sounds/battleVsTrainer_trim.mov');
-// let backgroundMusic = new Audio('sounds/soundEffectCollection.mp3');
-//
-// backgroundMusic.play();
 
 $('#playerOne').animate({'font-size': '45px'}, 0)
 $('p#playerOne').text(players[0].name);
 $('p#playerTwo').text(players[1].name);
 
 function recordChoice (cellIndex) {
+  // test for unique
+  if (board[cellIndex] != 0) return;
+
+  // record the choice visually and in the array, then swap turns
   if (whoseTurn === 1) {
     $(`#${cellIndex}`).css({'background-image': `url(${players[0].image})`});
     board[cellIndex] = 1;
@@ -39,15 +51,15 @@ function recordChoice (cellIndex) {
     swapPlayer();
   }
 
+  // testing for terminal state / finish
   setTimeout(function() {
-    let outcome = '';
-    if (drawTest()) outcome = drawTest();
-    if (threeTest()) outcome = threeTest();
-
-    if (outcome) {
-      roundOver(outcome);
-    } else {
+    let outcome = terminalStateTest(board);
+    if (outcome === -1) {
       if (whoseTurn === 2 && mode === 'computer') idealMove();
+    } else if (outcome === 0){
+      draw();
+    } else {
+      someoneWon(outcome);
     }
   }, 200);
 }
@@ -66,62 +78,26 @@ function swapPlayer () {
   }
 }
 
-function drawTest () {
-    let emptyCount = 0;
-    board.forEach(function(i) {if (i === 0) emptyCount++;});
-    if (emptyCount === 0) {
-    return 'draw';
-  }
-  return '';
-}
 
-function threeTest() {
-  let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
-  let outcome = '';
-  testList.forEach( function(test) {
-    if (board[test[0]] === 0 || board[test[1]] === 0 || board[test[2]] === 0) {
-    } else if (board[test[0]] === board[test[1]] && board[test[1]] === board[test[2]]) {
-      outcome = board[test[0]];
-    }
-});
-  return outcome;
-}
+function terminalStateTest(tempBoard) {
+  let testList = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
 
-function roundOver(i) {
-  turnPage('#gameScreen', '#roundOverScreen');
+  let output;
 
-  let finished = false;
+  testList.forEach(function(test) {
+    if (tempBoard[test[0]] === 0 || tempBoard[test[1]] === 0 || tempBoard[test[2]] === 0) { //ignore
+    } else if (tempBoard[test[0]] === tempBoard[test[1]] && tempBoard[test[2]] === tempBoard[test[1]]) {
+      output = tempBoard[test[1]]}
+  });
 
-  if (i === 'draw') {
-    $('#gameResults').text(`The game was a draw`);
-    $('#roundOverScreen img').attr('src',``)
+  if (output) {
+    return output;
   } else {
-    $('#gameResults').text(`${players[i-1].name} has won!`);
-    $('#roundOverScreen img').attr('src',`${players[i-1].image}`)
-    players[i-1].score ++;
-    if (evolve(i) === 'top') finished = true;
+    // test for draw
+    let emptyCount = 0;
+    tempBoard.forEach(function(i) {if (i === 0) emptyCount++;});
+    if (emptyCount === 0) return 0
   }
 
-  if (!finished) {
-    $('#playerOneScore').text(players[0].score);
-    $('#playerTwoScore').text(players[1].score);
-    roundCount++;
-    $('#roundNumber p').text(`Round ${roundCount}!`)
-
-    setTimeout(function(){
-      //reset board;
-      board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-      $('.game-cell').css({'background-image': ''});
-      whoseTurn = 1;
-      $('#playerOne').animate({'font-size': '45px'}, 200)
-      $('#playerTwo').animate({'font-size': '15px'}, 200)
-
-      turnPage('#roundOverScreen', '#roundNumber')
-
-      setTimeout(function() {turnPage('#roundNumber', '#fight')}, 1200);
-
-      setTimeout(function() {turnPage('#fight', '#gameScreen')}, 2400);
-
-    }, 4000);
-  }
+  return -1;
 }

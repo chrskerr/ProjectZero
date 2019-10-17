@@ -172,3 +172,32 @@ body {
   padding: 0;
   z-index: -1;
 }
+
+.tree {
+  max-width: 160px;
+  height: auto;
+  margin: auto;
+  position: absolute;
+  top: 152px;
+  padding: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.left {
+  left: 0;
+}
+
+.treeImg {
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+}
+
+.grey {
+  filter: grayscale(100%);
+  height: 50px;
+  width: 50px;
+}

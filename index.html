@@ -74,10 +74,10 @@
     <div id='gameScreen' class='pageDiv hidden'>
       <heading>
         <div class='playerNav'>
-          <img class='playerOne'></img>
+          <!-- <img class='playerOne'></img> -->
           <p id='playerOne'></p>
           <p id='playerTwo'></p>
-          <img class='playerTwo'></img>
+          <!-- <img class='playerTwo'></img> -->
         </div>
       </heading>
 
@@ -99,18 +99,43 @@
             <td class='game-cell' id='8'></td>
           </tr>
         </table>
+
+        <div id='leftTree' class='left tree'>
+          <img id='left0' class='treeImg'>
+          <img id='left1' class='treeImg'>
+          <img id='left2' class='treeImg'>
+        </div>
+
+        <div id='rightTree' class='right tree'>
+          <img id='right0' class='treeImg'>
+          <img id='right1' class='treeImg'>
+          <img id='right2' class='treeImg'>
+        </div>
+
       </main>
     </div>
 
-    <!-- HTML for the gameover / evolution screen -->
+    <!-- HTML for the roundOver / evolution screen -->
     <div id="roundOverScreen" class='pageDiv hidden noInteract'>
       <p id='gameResults'></p>
       <img id='oldPokemon'></img>
       <!-- <img id='newPokemon' class='hidden'></img> -->
     </div>
 
+    <!-- HTML for the gameover -->
+    <div id="gameOverScreen" class='pageDiv hidden noInteract'>
+      <p id='gameResults'></p>
+      <img id='oldPokemon'></img>
+      <!-- <img id='newPokemon' class='hidden'></img> -->
+    </div>
+
+    <!-- HTML for the draw screen -->
+    <div id="drawScreen" class='pageDiv hidden noInteract'>
+      <p>The game was a draw</p>
+    </div>
+
     <script src='js/jquery-3.4.1.js'></script>
-    <script src='js/listeners.js'></script>
+    <script src='js/pageFlow.js'></script>
     <script src='js/animations.js'></script>
     <script src='js/ai.js'></script>
     <script src='js/gameLogic.js'></script>

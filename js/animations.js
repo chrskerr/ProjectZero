@@ -1,3 +1,5 @@
+// code to be called to change pages, ONLY
+
 function turnPage (currentDiv, newDiv) {
   $(newDiv).css({'left': $(window).width() + 10}).removeClass('hidden')
 
@@ -12,98 +14,98 @@ function turnPage (currentDiv, newDiv) {
 function evolve (playerRef) {
   let loc;
 
-  //find current evolution
-  evolutions.forEach(function(i,k){
-    i.forEach(function(j,l) {
-      if (j === players[playerRef - 1].image) loc = [k,l];
-    })
-  });
+  let playerIndex = playerRef - 1; //return to 0
+  let currentTree = players[playerIndex].tree;
+  let score = players[playerIndex].score;
+  let oldScore = score - 1;
 
-  players[playerRef - 1].image = evolutions[loc[0]][loc[1]+1];
-
+  players[playerIndex].image = trees[currentTree][score];
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 0);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 500);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 1000);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 1250);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 1500);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 1750);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 2000);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 2250);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 2500);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 2650);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 2800);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 2950);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 3050);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 3150);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 3250);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]])
+    $('#roundOverScreen img').attr('src', trees[currentTree][oldScore])
   }, 3350);
 
   setTimeout(function(){
-    $('#roundOverScreen img').attr('src', evolutions[loc[0]][loc[1]+1])
+    $('#roundOverScreen img').attr('src', trees[currentTree][score])
   }, 3400);
 
-  $('img.playerOne').attr('src', players[0].image);
-  $('img.playerTwo').attr('src', players[1].image);
-
-  if (!evolutions[loc[0]][loc[1]+2]) return 'top'
-
+  setTimeout(function(){
+    $('img.playerOne').attr('src', players[0].image);
+    $('img.playerTwo').attr('src', players[1].image);
+  }, 4000);
 }
 
-let evolutions = [['images/charmander.png', 'images/charmeleon.png', 'images/charizard.png'],['images/squirtle.png','images/wartortle.png','images/blastoise.png'],['images/bulbasaur.png','images/ivysaur.png','images/venusaur.png']];
+
+
 
 function randomPokeDrop() {
-  let x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
-  let y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
-  let pic = Math.floor(Math.random() * 3);
-  let newPic = $(`<img src=${evolutions[pic][0]}></img>`);
+  const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
+  const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
+
+  const keys = Object.keys(trees);
+
+  let newPic = $(`<img src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
+
   newPic.css('left', `${x}px`).css('top', `${y}px`);
   $('#pokeBucket').append(newPic);
 }
