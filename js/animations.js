@@ -91,22 +91,38 @@ function evolve (playerRef) {
   }, 4000);
 }
 
+// // new WAY
+
+// function randomPokeDropBuild () {
+//   for (i = 0; i < 1000; i++) {
+
+//     const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
+//     const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
+
+//     const keys = Object.keys(trees);
+
+//     let newPic = $(`<img class='loadPokeImg' src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
+
+//     newPic.css('left', `${x}px`).css('top', `${y}px`);
+//     $('#pokeBucket').append(newPic);
+//   }
+// }
+
+// randomPokeDropBuild();
 
 
-
+old WAY
 function randomPokeDrop() {
   const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
   const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
 
   const keys = Object.keys(trees);
 
-  let newPic = $(`<img src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
+  let newPic = $(`<img class='loadPokeImg' src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
 
   newPic.css('left', `${x}px`).css('top', `${y}px`);
   $('#pokeBucket').append(newPic);
-
-  // setTimeout(function(){$('#pokeBucket:first-child').fadeOut(1000)},2000);
-
 }
 
 let pokeDropTimer = setInterval(randomPokeDrop, 50);
+
