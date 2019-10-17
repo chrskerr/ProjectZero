@@ -115,11 +115,8 @@ function evolve (playerRef) {
 function randomPokeDrop() {
   const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
   const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
-
   const keys = Object.keys(trees);
-
   let newPic = $(`<img class='loadPokeImg' src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
-
   newPic.css('left', `${x}px`).css('top', `${y}px`);
   $('#pokeBucket').append(newPic);
 }

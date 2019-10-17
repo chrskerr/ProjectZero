@@ -158,6 +158,19 @@ img.garyChosen{
 #pokeBucket img {
   position: absolute;
   z-index: -1;
+  animation-name: pokeFade;
+  animation-duration: 1.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in; 
+  opacity: 0;
+}
+
+
+@keyframes pokeFade {
+  0% { opacity: 1; } 
+  100% { 
+    opacity: 0; 
+    }
 }
 
 #pokeBucket {
@@ -248,21 +261,6 @@ img.garyChosen{
   padding: 0;
   position: relative;
   vertical-align: middle;
-}
-
-.loadPokeImg {
-  animation-name: pokeFade;
-  animation-duration: 1.5s;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in; 
-  opacity: 0;
-}
-
-@keyframes pokeFade {
-  0% { opacity: 1; } 
-  100% { 
-    opacity: 0; 
-    }
 }
 
 #currentSong {
