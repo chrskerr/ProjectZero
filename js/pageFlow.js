@@ -2,7 +2,13 @@
 // also for all page turns and pageflow logic
 
 $('.game-cell').click(function() {
-  recordChoice($(this).attr('id'));
+  if (mode === 'computer') {
+    if (whoseTurn === 1) {
+      recordChoice($(this).attr('id'));
+    }
+  } else {
+    recordChoice($(this).attr('id'));
+  }
 });
 
 $('#instructions button').click( function() {
@@ -14,9 +20,7 @@ $('#instructions button').click( function() {
 
 $('#newGame').click(newGameReset);
 
-$('#nameInput').on('keydown',function(){
-  console.log($(this).val().length)
-
+$('#nameInput').on('keyup',function(){
   if ($(this).val().length * 0.7 > 5) {
     $('#nameInput').width(`${$(this).val().length * 0.7}em`)
   }
@@ -100,8 +104,7 @@ function someoneWon(i) {
     $('#gameResults').text(`${players[i-1].name} has won!`);
     $('#roundOverScreen img').attr('src',`${players[i-1].image}`)
     evolve(i);
-    roundCount++;
-    $('#roundNumber p').text(`Round ${roundCount}!`)
+
     setTimeout(function(){newRound('#roundOverScreen')}, 4000);
   }
 }
@@ -111,15 +114,11 @@ function newRound (currentPage) {
   board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   $('.game-cell').css({'background-image': ''});
 
+  roundCount++;
+  $('#roundNumber p').text(`Round ${roundCount}!`)
   turnPage(currentPage, '#roundNumber')
   setTimeout(function() {turnPage('#roundNumber', '#fight')}, 1200);
   setTimeout(function() {turnPage('#fight', '#gameScreen')}, 2400);
-  whoseTurn = 2;
-
-  setTimeout(function() {
-    if (mode === 'computer') idealMove();
-  }, 3400);
-
   $('#playerTwo').animate({'font-size': '15px'}, 200)
   $('#playerOne').animate({'font-size': '15px'}, 200)
 
@@ -135,6 +134,11 @@ function newRound (currentPage) {
       swapPlayer();
     }
   }
+
+  setTimeout(function() {
+    if (mode === 'computer' && whoseTurn === 2) idealMove();
+  }, 3400);
+
   updateTrees();
 }
 

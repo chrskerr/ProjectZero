@@ -23,7 +23,6 @@ function idealMove () {
   // seperate weighting logic
   // moveWeights[4] += 10;
   let bestChoice = [0,-1000]; // [index, weight]
-  console.log(moveWeights)
 
   moveWeights.forEach(function(j, i) {
     if (j > bestChoice[1]) bestChoice = [i,j];
@@ -43,7 +42,7 @@ function minMaxFirst(prevPlayer, loopBoard, currentPlays, countList) {
     tmpBoard[j] = player;
     let newPlays = [];
     tmpBoard.forEach(function(i,j) {if (i === 0) newPlays.push(j)});
-    minMaxOutput[j] = minMax(player, tmpBoard, newPlays, countList, 0);
+    minMaxOutput[j] = minMax(player, tmpBoard, newPlays, countList, 1);
     // this function should output the moveWeights for each available move to it, this will allow for difficult selector later
 
   })
@@ -59,11 +58,12 @@ function minMax(prevPlayer, loopBoard, currentPlays, countList, depth) {
   } else if (terminalStateTest(loopBoard) === 0) {
       return 0;
   } else {
-    let outputTotal;
 
     //flip player
     if (prevPlayer === 1) {player = 2} else if (prevPlayer === 2) {player = 1}
     let outputTmp = [];
+    let outputTotal;
+
 
     currentPlays.forEach( function(j) {
       //build the minMax input info
@@ -75,9 +75,6 @@ function minMax(prevPlayer, loopBoard, currentPlays, countList, depth) {
 
       outputTmp.push(minMax(player, tmpBoard, newPlays, countList, depth++));
     })
-
-    // if (depth < 5) console.log(loopBoard + "\b" + depth + ': ' + outputTmp);
-
     outputTmp.forEach(function(i){
       if (!outputTotal) {
         outputTotal = i;
