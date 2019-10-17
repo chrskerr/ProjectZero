@@ -1,9 +1,16 @@
 <!-- A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc. -->
-# Pokemon Evolve - Tic Tac Toe
+# Pokemon - Tic Tac Toe
 
 [Live demo](https://chrskerr.github.io/ProjectZero)
 
++ This is an interactive Player v Player or Player v Computer version to Tic Tac Toe.
++ It is built using jQuery, HTML & CSS, all run as client-side code.
++ I took an approach of building basic logic for PvP play-through operations, and then creating a brute-force minMax engine which provides a Player 2 response when Computer Mode is chosen.
++ This was by far the hardest element of this, and remains non-perfect. It look many iterations of fine-tuning to achieve reasonably solid results. And the computer player is now a fairly challenging opponent, sometimes perfect, sometimes making mistakes.
++ Zero installation needed, all run in browser.
++ The evolve animation is implemented in a very repetitive fashion. Improving this, and similar animations, would be my next piece of work against a project like this, as I believe that this is presently the worst-implement element of the page.
 
+Thank you for taking the time to view this with me!
 
 
 
