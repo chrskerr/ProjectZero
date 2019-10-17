@@ -111,7 +111,7 @@ function evolve (playerRef) {
 // randomPokeDropBuild();
 
 
-old WAY
+// old WAY
 function randomPokeDrop() {
   const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
   const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
