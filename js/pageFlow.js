@@ -27,10 +27,13 @@ $('.characterchooser').click(function() {
 function chooseCharacter(id) {
   if (chooserClickCount === 0) {
     players[0].image = id;
+    players[0].name = $('#nameInput').val();
     players[0].tree = id.slice(id.indexOf('/')+1,id.indexOf('.'));
     $('.ashChosen').css({'display': 'inline-block'});
     $('img.ashChosen').attr('src', players[0].image);
-    $('#lineTwo').text('Gary, now your turn!');
+    $('#lineTwo').text('now your turn!');
+    $('#nameInput').val('Gary');
+    $('p.ashChosenText').text(`${players[0].name} has chosen:`)
     chooserClickCount++;
 
 
@@ -39,10 +42,12 @@ function chooseCharacter(id) {
   } else if (chooserClickCount === 1) {
     if (id === players[0].image) return false;
     players[1].image = id;
+    players[1].name = $('#nameInput').val();
     players[1].tree = id.slice(id.indexOf('/')+1,id.indexOf('.'));
     $('.garyChosen').css({'display': 'inline-block'});
     $('img.garyChosen').attr('src', players[1].image);
     $('#lineTwo').text('READY TO FIGHT!');
+    $('p.garyChosenText').text(`${players[1].name} has chosen:`)
     chooserClickCount++;
 
   }
@@ -168,4 +173,8 @@ function updateTrees() {
   $('.treeImg').addClass('grey');
   $(`#left${players[0].score}`).removeClass('grey');
   $(`#right${players[1].score}`).removeClass('grey');
+  $('#playerOne').animate({'font-size': '45px'}, 0)
+  $('p#playerOne').text(players[0].name);
+  $('p#playerTwo').text(players[1].name);
+
 }

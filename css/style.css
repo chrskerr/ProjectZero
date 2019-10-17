@@ -201,3 +201,15 @@ body {
   height: 50px;
   width: 50px;
 }
+
+#nameInput {
+  display: inline-block;
+  width: 65px;
+  margin-right: 1em;
+  font-family: inherit;
+  font-size: 1.5em;
+}
+
+#lineTwo {
+  display: inline-block;
+}
