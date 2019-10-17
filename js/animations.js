@@ -108,6 +108,9 @@ function randomPokeDrop() {
 
   newPic.css('left', `${x}px`).css('top', `${y}px`);
   $('#pokeBucket').append(newPic);
+
+  // setTimeout(function(){$('#pokeBucket:first-child').fadeOut(1000)},2000);
+
 }
 
 let pokeDropTimer = setInterval(randomPokeDrop, 50);

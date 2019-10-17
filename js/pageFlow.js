@@ -14,6 +14,13 @@ $('#instructions button').click( function() {
 
 $('#newGame').click(newGameReset);
 
+$('#nameInput').on('keydown',function(){
+  console.log($(this).val().length)
+
+  if ($(this).val().length * 0.7 > 5) {
+    $('#nameInput').width(`${$(this).val().length * 0.7}em`)
+  }
+})
 
 $('.modeChooserButton').click( function() {
   mode = $(this).attr('id');
@@ -33,6 +40,7 @@ function chooseCharacter(id) {
     $('img.ashChosen').attr('src', players[0].image);
     $('#lineTwo').text('now your turn!');
     $('#nameInput').val('Gary');
+    $('#nameInput').width(`5em`);
     $('p.ashChosenText').text(`${players[0].name} has chosen:`)
     chooserClickCount++;
 
@@ -46,6 +54,7 @@ function chooseCharacter(id) {
     players[1].tree = id.slice(id.indexOf('/')+1,id.indexOf('.'));
     $('.garyChosen').css({'display': 'inline-block'});
     $('img.garyChosen').attr('src', players[1].image);
+    $('#nameInput').hide();
     $('#lineTwo').text('READY TO FIGHT!');
     $('p.garyChosenText').text(`${players[1].name} has chosen:`)
     chooserClickCount++;
@@ -110,6 +119,9 @@ function newRound (currentPage) {
   setTimeout(function() {
     if (mode === 'computer') idealMove();
   }, 3400);
+
+  $('#playerTwo').animate({'font-size': '15px'}, 200)
+  $('#playerOne').animate({'font-size': '15px'}, 200)
 
   //flipPlayer
   if (whoStarted === 1) {

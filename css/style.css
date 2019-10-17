@@ -1,17 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Livvic&display=swap');
 
-@font-face {
-  font-family: 'Pokemon Solid';
-  src: url('../fonts/Pokemon Solid.ttf')
-}
-
-@font-face {
-  font-family: 'Pokemon Hollow';
-  src: url('../fonts/Pokemon Hollow.ttf')
-}
-
 body {
-  /* font-family: 'Pokemon Solid', sans-serif; */
   font-family: 'Livvic', sans-serif;
   box-sizing: border-box;
   padding: 0;
@@ -19,9 +8,6 @@ body {
   color: #222222;
   height: 100%;
   width: 100%;
-  /* letter-spacing: 3px;
-  color: #ffcc03;
-  text-shadow: -2px -2px 1px #316DBE, 2px -2px 1px #316DBE, -2px 2px 1px #316DBE, 2px 2px 1px #316DBE; */
 }
 
 .pageDiv {
@@ -145,6 +131,7 @@ body {
   width: 60%;
   margin-left: 20%;
   margin-top: 100px;
+  padding: 25px;
   display: block;
   position: relative;
   background-color: rgba(255,255,255,0.75);
@@ -204,12 +191,16 @@ body {
 
 #nameInput {
   display: inline-block;
-  width: 65px;
-  margin-right: 1em;
+  width: 5em;
   font-family: inherit;
   font-size: 1.5em;
 }
 
 #lineTwo {
   display: inline-block;
+  margin-left: 1em;
+}
+
+#newGame {
+  margin: 300px;
 }

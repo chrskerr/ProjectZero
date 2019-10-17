@@ -53,9 +53,9 @@ function minMaxFirst(prevPlayer, loopBoard, currentPlays, countList) {
 function minMax(prevPlayer, loopBoard, currentPlays, countList, depth) {
   // terminal state exit logic
   if (terminalStateTest(loopBoard) === 2) {
-    return 1;
+    return 1 * (1/depth);
   } else if (terminalStateTest(loopBoard) === 1) {
-    return  -1;
+    return  -1 * (1/depth);
   } else if (terminalStateTest(loopBoard) === 0) {
       return 0;
   } else {
