@@ -93,33 +93,40 @@ function evolve (playerRef) {
 
 // // new WAY
 
-// function randomPokeDropBuild () {
-//   for (i = 0; i < 1000; i++) {
+function randomPokeDropBuild () {
+  for (let i = 0; i < 1000; i++) {
 
-//     const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
-//     const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
+    const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
+    const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
 
-//     const keys = Object.keys(trees);
+    const keys = Object.keys(trees);
 
-//     let newPic = $(`<img class='loadPokeImg' src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
+    let newPic = $(`<img class='' src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
 
-//     newPic.css('left', `${x}px`).css('top', `${y}px`);
-//     $('#pokeBucket').append(newPic);
-//   }
-// }
+    newPic.css('left', `${x}px`).css('top', `${y}px`);
+    $('#pokeBucket').append(newPic);
+  }
+}
 
-// randomPokeDropBuild();
-
-
-// old WAY
 function randomPokeDrop() {
-  const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
-  const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
-  const keys = Object.keys(trees);
-  let newPic = $(`<img class='loadPokeImg' src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
-  newPic.css('left', `${x}px`).css('top', `${y}px`);
-  $('#pokeBucket').append(newPic);
+  const randomImg = Math.floor(Math.random() * 1000);
+  const imgList = $('#pokeBucket img');
+  let $currentImg = $(imgList[randomImg]);
+  $($currentImg).addClass('animateFade');
 }
 
 let pokeDropTimer = setInterval(randomPokeDrop, 50);
+
+
+// old WAY
+// function randomPokeDrop() {
+//   const x = Math.floor(Math.random() * ($('#pokeBucket').width()-100));
+//   const y = Math.floor(Math.random() * ($('#pokeBucket').height()-100));
+//   const keys = Object.keys(trees);
+//   let newPic = $(`<img class='loadPokeImg' src=${trees[keys[Math.floor(Math.random() * 3)]][Math.floor(Math.random() * 3)]}></img>`);
+//   newPic.css('left', `${x}px`).css('top', `${y}px`);
+//   $('#pokeBucket').append(newPic);
+// }
+
+// let pokeDropTimer = setInterval(randomPokeDrop, 50);
 

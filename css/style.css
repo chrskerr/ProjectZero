@@ -158,11 +158,18 @@ img.garyChosen{
 #pokeBucket img {
   position: absolute;
   z-index: -1;
-  animation-name: pokeFade;
+ /* animation-name: pokeFade;
   animation-duration: 1.5s;
   animation-iteration-count: 1;
-  animation-timing-function: ease-in; 
+  animation-timing-function: ease-in; */
   opacity: 0;
+}
+
+.animateFade {
+  animation-name: pokeFade;
+  animation-duration: 2.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in; 
 }
 
 

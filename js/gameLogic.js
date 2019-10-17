@@ -94,3 +94,6 @@ function terminalStateTest(tempBoard) {
   }
   return -1;
 }
+
+randomPokeDropBuild();
+
