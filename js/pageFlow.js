@@ -67,16 +67,12 @@ function chooseCharacter(id) {
 
   if (chooserClickCount === 2) {
 
-    // themeSong.play();
+    themeSong.play();
 
     setTimeout(function() {
-      // $('img.playerOne').attr('src', players[0].image);
-      // $('img.playerTwo').attr('src', players[1].image);
-
       updateTrees();
-
       turnPage('#characterPage','#gameScreen');
-    }, 600);
+    }, 650);
   }
 }
 
@@ -86,7 +82,7 @@ function computerPick(id) {
   if (id === 'images/charmander.png') choice = 'images/squirtle.png'
   if (id === 'images/squirtle.png') choice = 'images/bulbasaur.png'
 
-  setTimeout(function(){chooseCharacter(choice)}, 400)
+  setTimeout(function(){chooseCharacter(choice)}, computerResponseTime)
 }
 
 function draw() {
